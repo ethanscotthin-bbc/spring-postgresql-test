@@ -21,14 +21,7 @@ public class StudentConfig {
 
             );
 
-            Student danny = new Student(
-                    "Danny Rutter",
-                    LocalDate.of(2000, 11, 22),
-                    "danny.rutter@bbc.co.uk"
-
-            );
-
-            repository.saveAll(List.of(ethan, danny));
+            repository.saveAll(List.of(ethan));
         };
     }
 }

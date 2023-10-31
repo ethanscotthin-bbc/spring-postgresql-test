@@ -27,7 +27,7 @@ public class StudentService {
 
 
     public void addNewStudent(Student student) {
-        Optional<Student> studentOptional = studentRepository.findStudentByEmail(student.getEmail());
+        Optional<Student> studentOptional = studentRepository.findByEmail(student.getEmail());
 
         if (studentOptional.isPresent()) {
             throw new IllegalStateException("email taken");
@@ -47,6 +47,7 @@ public class StudentService {
 
     @Transactional
     public void updateStudent(Long studentID, String name, String email) {
+
         if (studentRepository.existsById(studentID)) {
             Student student = studentRepository.findById(studentID).orElseThrow(
                     () -> new IllegalStateException("Student does not exist.")
@@ -55,7 +56,7 @@ public class StudentService {
             if (name != null && name.length() > 0 ) {
                 student.setName(name);
             }
-            Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
+            Optional<Student> studentOptional = studentRepository.findByEmail(email);
 
             if (studentOptional.isPresent()) {
                 throw new IllegalStateException("email taken");
